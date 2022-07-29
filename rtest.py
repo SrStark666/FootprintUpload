@@ -3,10 +3,13 @@ import urllib.request
 import os
 import random
 
+valid_directs = []
+valid_redirects = []
+agents = {}
 
-def req(key):
+def req(file_name):
         try:
-                r = requests.get(genc, headers=agents, allow_redirects=False)
+                r = requests.get(genc, headers=agents)
                 os.mkdir(nome_empresa)
         except requests.exceptions.ConnectionError:
                 print("\033[01;31mUrl inválida!!\033[0m")
@@ -15,9 +18,10 @@ def req(key):
                 pass
 
         stats = r.status_code
-        with open(f"{nome_empresa}/{key}", "a") as dit:
+
+        with open(f"{nome_empresa}/{file_name}", "a") as dit:
                 if stats == 200 or stats == 304:
-                        dit.write(f"{genc}")
+                        dit.write(f"{genc}\n")
                  
         if stats == 200:
                 valid_directs.append(genc) 
@@ -87,9 +91,6 @@ def header():
                 print("Header: \033[01;32m/headers.txt\033[0m")
 
 
-valid_directs = []
-valid_redirects = []
-agents = {}
 
 print("[1]https [2]http")
 try:
